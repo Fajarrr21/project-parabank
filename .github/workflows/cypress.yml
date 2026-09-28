@@ -6,6 +6,17 @@ on:
   pull_request:
     branches: [main]
 
+# Izin yang dibutuhkan untuk deploy laporan ke GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Hanya satu deploy Pages yang boleh berjalan dalam satu waktu.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   cypress-run:
     name: Run Cypress Tests
@@ -56,3 +67,39 @@ jobs:
           path: cypress/reports
           if-no-files-found: ignore
           retention-days: 7
+
+      # --- Persiapan GitHub Pages ---
+      # Dijalankan dengan if: always() karena suite ini memang punya 4 test yang
+      # sengaja merah (bug ParaBank, lihat Known Issue di README). Tanpa ini,
+      # laporan tidak akan pernah ter-publish.
+      - name: Prepare Pages artifact
+        if: always() && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p public
+          cp -r cypress/reports/. public/ 2>/dev/null || true
+          touch public/.nojekyll
+          # Fallback kalau report gagal dibuat, supaya deploy tidak error.
+          if [ ! -f public/index.html ]; then
+            echo "<h1>Laporan Cypress tidak tersedia untuk run ini.</h1>" > public/index.html
+          fi
+
+      - name: Upload Pages artifact
+        if: always() && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy-report:
+    name: Deploy Report to GitHub Pages
+    needs: cypress-run
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
