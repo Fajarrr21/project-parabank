@@ -1,0 +1,24 @@
+{
+  "name": "parabank-cypress-automation",
+  "version": "1.0.0",
+  "description": "Automation testing ParaBank menggunakan Cypress + Page Object Model",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:ui": "cypress run --spec \"cypress/e2e/*.cy.js\"",
+    "test:api": "cypress run --spec \"cypress/e2e/api/*.cy.js\""
+  },
+  "keywords": [
+    "cypress",
+    "automation",
+    "qa",
+    "parabank"
+  ],
+  "author": "Fajar Ardiansyah - QA Engineer",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^15.21.1",
+    "cypress-mochawesome-reporter": "^5.0.0"
+  }
+}

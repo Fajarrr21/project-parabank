@@ -1,0 +1,84 @@
+{
+  "defaultPassword": "Password123",
+
+  "profile": {
+    "firstName": "Fajar",
+    "lastName": "Ardiansyah",
+    "street": "Jl. Merdeka No. 10",
+    "city": "Jakarta",
+    "state": "DKI Jakarta",
+    "zipCode": "10110",
+    "phoneNumber": "081234567890",
+    "ssn": "123-45-6789"
+  },
+
+  "updatedProfile": {
+    "firstName": "Fajar Updated",
+    "lastName": "Ardiansyah Updated",
+    "street": "Jl. Sudirman No. 88",
+    "city": "Bandung",
+    "state": "Jawa Barat",
+    "zipCode": "40111",
+    "phoneNumber": "089876543210"
+  },
+
+  "invalidCredentials": {
+    "wrongUsername": {
+      "username": "user_tidak_terdaftar_qa",
+      "password": "Password123"
+    },
+    "wrongPassword": {
+      "password": "PasswordSalah999"
+    },
+    "empty": {
+      "username": "",
+      "password": ""
+    }
+  },
+
+  "expectedMessages": {
+    "loginFailed": "The username and password could not be verified.",
+    "loginEmpty": "Please enter a username and password.",
+    "registerSuccess": "Your account was created successfully. You are now logged in.",
+    "usernameExists": "This username already exists.",
+    "passwordMismatch": "Passwords did not match.",
+    "transferComplete": "Transfer Complete!",
+    "billpayComplete": "Bill Payment Complete",
+    "profileUpdated": "Profile Updated"
+  },
+
+  "payee": {
+    "name": "PLN Jakarta",
+    "street": "Jl. Trunojoyo No. 135",
+    "city": "Jakarta Selatan",
+    "state": "DKI Jakarta",
+    "zipCode": "12160",
+    "phoneNumber": "081100001111",
+    "accountNumber": "12345",
+    "amount": "50"
+  },
+
+  "transfer": {
+    "validAmount": "100",
+    "zeroAmount": "0",
+    "negativeAmount": "-50",
+    "overBalanceAmount": "9999999"
+  },
+
+  "loan": {
+    "approved": {
+      "amount": "100",
+      "downPayment": "50"
+    },
+    "denied": {
+      "amount": "1000000",
+      "downPayment": "100"
+    }
+  },
+
+  "findTransactions": {
+    "seedAmount": "137",
+    "nonExistentAmount": "987654.32",
+    "invalidDate": "2026/01/01"
+  }
+}
